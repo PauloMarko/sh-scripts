@@ -1,0 +1,12 @@
+# C/C++ Compile and Run
+crun() {
+    [[ $# -ne 1 || ! -f "$1" || ! "$1" =~ \.(c|cpp|cc|cxx)$ ]] && {
+        echo "Use: crun <file>.c, <file>.cpp, <file>.cc or <file>.cxx"
+        return 1
+    }
+
+    local compiler="g++"
+    [[ "$1" =~ \.c$ ]] && compiler="gcc"
+
+    $compiler "$1" -o "${1%.*}" && ./"${1%.*}"
+        }
